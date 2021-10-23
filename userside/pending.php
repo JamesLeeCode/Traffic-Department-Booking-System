@@ -37,7 +37,30 @@
 
 <body>
   <!-- Sidenav -->
+  <?php
+  include '../phpScripts/db_connection.php';
+  $conn = OpenCon();
+  session_start();
+    $id =  $_SESSION["booking_id"];
+  $sql = "SELECT * FROM bookings where booking_id = '$id'";
+  $result = $conn->query($sql);
 
+  //Store the results in an array
+  $applicationBookingDate	=" ";
+  $bookingApprovalDate	=" ";
+  $testPaymentDate=" ";
+  $collectionDate=" ";
+  while ($row = mysqli_fetch_assoc($result)) {
+    $applicationBookingDate	 = $row['applicationBookingDate'];
+    $bookingApprovalDate	 = $row['bookingApprovalDate'];
+    $testPaymentDate	 = $row['testPaymentDate'];
+    $collectionDate	 = $row['collectionDate'];
+  }
+  //CLose DB Connection
+  CloseCon($conn);
+  //Session the Employees array
+
+  ?>
   <!-- Main content -->
   <div class="main-content" id="panel">
     <!-- Topnav -->
@@ -206,78 +229,148 @@
             <div class="card-header">
               <div class="row align-items-center">
                 <div class="col-8">
-                  <h3 class="mb-0">Book Your Slot </h3>
+                  <h3 class="mb-0">Process Status </h3>
                 </div>
 
               </div>
             </div>
             <div class="card-body">
 
-              <h2>A clean timeline design | <a href="https://codepen.io/hunzaboy/pen/qBWRBXw" target="_blank">Checkout Version 2</a></h2>
+              <h2>Process | Timeline </h2>
 
-    <div class="timeline">
+    <div style="margin-left:80px" class="timeline">
       <div class="timeline__event  animated fadeInUp delay-3s timeline__event--type1">
         <div class="timeline__event__icon ">
-          <i class="lni-cake"></i>
+        <i class="ni ni-check-bold"></i>
           <div class="timeline__event__date">
-            20-08-2019
+            <?php
+            echo $applicationBookingDate;
+             ?>
           </div>
         </div>
         <div class="timeline__event__content ">
           <div class="timeline__event__title">
-            Birthday
+            Application Booking
           </div>
           <div class="timeline__event__description">
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vel, nam! Nam eveniet ut aliquam ab asperiores, accusamus iure veniam corporis incidunt reprehenderit accusantium id aut architecto harum quidem dolorem in!</p>
+            <p>Submission of application was successfull. Check you email for conformation. The system will send you an email after checking your details and documents</p>
           </div>
         </div>
       </div>
       <div class="timeline__event animated fadeInUp delay-2s timeline__event--type2">
         <div class="timeline__event__icon">
-          <i class="lni-burger"></i>
+
+          <?php if ($bookingApprovalDate == 'Pending'){ ?>
+            <i class="ni ni-fat-remove"></i>
+          <?php } ?>
+          <?php if ($bookingApprovalDate !='Pending'){ ?>
+                <i class="ni ni-check-bold"></i>
+          <?php } ?>
           <div class="timeline__event__date">
-            20-08-2019
+            <?php
+            echo $bookingApprovalDate;
+             ?>
           </div>
         </div>
         <div class="timeline__event__content">
           <div class="timeline__event__title">
-            Lunch
+            Booking Approval
           </div>
           <div class="timeline__event__description">
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vel, nam! Nam eveniet ut aliquam ab asperiores, accusamus iure veniam corporis incidunt reprehenderit accusantium id aut architecto harum quidem dolorem in!</p>
+
+            <p>
+             <?php if ($bookingApprovalDate=='Pending'){?>
+               All the admins are still busy but one will come to attend to your application
+             <?php }
+             elseif($applicationBookingDate=='Denied'){ ?>
+              Please check your email to see why your apllication was denied.
+             <?php }
+             else{
+               ?>
+             Please come for your booking on the following date :   <?php
+               echo $applicationBookingDate;
+                ?>
+             <?php }
+               ?>
+
+            </p>
           </div>
         </div>
       </div>
       <div class="timeline__event animated fadeInUp delay-1s timeline__event--type3">
         <div class="timeline__event__icon">
-          <i class="lni-slim"></i>
+          <?php if ($testPaymentDate == 'Pending'){ ?>
+            <i class="ni ni-fat-remove"></i>
+          <?php } ?>
+          <?php if ($testPaymentDate !='Pending'){ ?>
+                <i class="ni ni-check-bold"></i>
+          <?php } ?>
           <div class="timeline__event__date">
-            20-08-2019
+            <?php
+            echo $testPaymentDate;
+             ?>
           </div>
+
         </div>
         <div class="timeline__event__content">
           <div class="timeline__event__title">
-            Exercise
+            Payment|Test Completed
           </div>
           <div class="timeline__event__description">
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vel, nam! Nam eveniet ut aliquam ab asperiores, accusamus iure veniam corporis incidunt reprehenderit accusantium id aut architecto harum quidem dolorem in!</p>
+            <p>
+             <?php if ($testPaymentDate=='Pending'){?>
+               All the admins are still busy but one will come to attend to your application
+             <?php }
+             elseif($testPaymentDate=='Denied'){ ?>
+              Please check your email to see why your apllication was denied.
+             <?php }
+             else{
+               ?>
+                Thank you for coming for your appoinment, Your payment/test was proccessed. Please wait for the collecting date.   <?php
+
+                ?>
+             <?php }
+               ?>
+
+            </p>
           </div>
 
         </div>
       </div>
       <div class="timeline__event animated fadeInUp timeline__event--type1">
         <div class="timeline__event__icon">
-          <i class="lni-cake"></i>
+          <?php if ($collectionDate == 'Pending'){ ?>
+            <i class="ni ni-fat-remove"></i>
+          <?php } ?>
+          <?php if ($collectionDate !='Pending'){ ?>
+                <i class="ni ni-check-bold"></i>
+          <?php } ?>
           <div class="timeline__event__date">
-            20-08-2019
+          <?php echo $collectionDate; ?>
           </div>
         </div>
         <div class="timeline__event__content">
           <div class="timeline__event__title">
-            Birthday
+            Ready Collection
           </div>
           <div class="timeline__event__description">
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vel, nam! Nam eveniet ut aliquam ab asperiores, accusamus iure veniam corporis incidunt reprehenderit accusantium id aut architecto harum quidem dolorem in!</p>
+            <p>
+
+              <?php if ($collectionDate=='Pending'){?>
+                All the admins are still busy but one will come to attend to your application
+              <?php }
+              elseif($collectionDate=='Denied'){ ?>
+               Please check your email to see why your apllication was denied.
+              <?php }
+              else{
+                ?>
+                 Thank you for coming for your appoinment, Your payment/test was proccessed. Please wait for the collecting date.   <?php
+
+                 ?>
+              <?php }
+                ?>
+
+            </p>
           </div>
         </div>
       </div>

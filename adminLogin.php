@@ -171,11 +171,12 @@
     <hr>
     </div>
 
-
+  <form  method="POST" action="phpScripts/adminLogin.php">
     <input type="text" name="email" placeholder="E-mail" />
     <input type="password" name="password" placeholder="Password" />
 
     <input type="submit" name="signup_submit" value="Sign me In" />
+  </form>
   </div>
 
   <div class="right">

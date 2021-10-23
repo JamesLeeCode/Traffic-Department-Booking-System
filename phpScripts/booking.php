@@ -1,5 +1,5 @@
 <?php
-
+  session_start();
 $id_location = " ";
 $poa_location = " ";
 
@@ -75,7 +75,7 @@ $poa_location = " ";
           $lastname = $_POST['lastname'];
           $id = $_POST['id'];
           $cellphone = $_POST['cellphone'];
-          $email = $_POST['email'];
+          $email =  $_SESSION["email"];
           $address = $_POST['address'];
           $city = $_POST['city'];
           $country = $_POST['country'];
@@ -83,13 +83,23 @@ $poa_location = " ";
           $notes = $_POST['notes'];
           $type = $_POST['type'];
 
+          $applicationDate = date("d-m-Y");
 
-          $booking_id = $id;
+          function generateRandomString($length = 13) {
+              $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+              $charactersLength = strlen($characters);
+              $randomString = '';
+              for ($i = 0; $i < $length; $i++) {
+                  $randomString .= $characters[rand(0, $charactersLength - 1)];
+              }
+              return $randomString;
+          }
+          $booking_id = generateRandomString();
 
           // Enter Designations Into DB
          if(!$conn -> query(
-           " INSERT INTO bookings (firstname, lastname,	id, cellphone, email , address, city , country ,postalCode, notes, id_location, poa_location, booking_id, type	)
-           VALUES ('$firstname','$lastname','$id', '$cellphone', '$email', '$address', '$city','$country','$postalCode','$notes','$id_location', '$poa_location',  '$booking_id ', '$type')"
+           " INSERT INTO bookings (firstname, lastname,	id, cellphone, email , address, city , country ,postalCode, notes, id_location, poa_location, booking_id, type,                      applicationBookingDate , 	bookingApprovalDate	, testPaymentDate ,collectionDate, applicationFinished  	)
+           VALUES ('$firstname','$lastname','$id', '$cellphone', '$email', '$address', '$city','$country','$postalCode','$notes','$id_location', '$poa_location',  '$booking_id ', '$type', '$applicationDate',      'Pending', 'Pending', 'Pending', 'open'  )"
            ))
            {
              echo("Error description: ". $mysqli->error);

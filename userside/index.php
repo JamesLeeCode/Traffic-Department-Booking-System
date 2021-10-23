@@ -13,6 +13,36 @@
 =========================================================
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 -->
+<?php
+include '../phpScripts/db_connection.php';
+session_start();
+$user =  $_SESSION["email"];
+$conn = OpenCon();
+$sql = "SELECT * FROM users where email = '$user' ";
+$result = $conn->query($sql);
+//Store the results in an array
+$username = "";
+while ($row = mysqli_fetch_assoc($result)) {
+   $username = $row['fullName'];
+}
+
+
+$sql = "SELECT * FROM bookings where email = '$user' AND applicationBooking='open' ";
+$result = $conn->query($sql);
+//Store the results in an array
+
+while ($row = mysqli_fetch_assoc($result)) {
+     $_SESSION["booking_id"]   = $row['booking_id'];
+  header("Location:pending.php");
+  exit();
+}
+//CLose DB Connection
+CloseCon($conn);
+
+
+
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -36,23 +66,7 @@
 
 <body>
   <!-- Sidenav -->
-  <?php
-  include '../phpScripts/db_connection.php';
-  $user = $_GET['user'];
-  $conn = OpenCon();
-  $sql = "SELECT * FROM users where email = '$user' ";
-  $result = $conn->query($sql);
-  //Store the results in an array
-  $username = "";
-  while ($row = mysqli_fetch_assoc($result)) {
-     $username = $row['fullName'];
-  }
-  //CLose DB Connection
-  CloseCon($conn);
 
-
-
-  ?>
   <!-- Main content -->
   <div class="main-content" id="panel">
     <!-- Topnav -->
@@ -304,7 +318,9 @@
                     <div class="col-lg-6">
                       <div class="form-group">
                         <label class="form-control-label" for="input-email">Email address</label>
-                        <input type="email" id="email" name="email" class="form-control" placeholder="Email address">
+                        <input disabled type="email" id="email" name="email" class="form-control" value=" <?php
+                          echo $_SESSION["email"];
+                         ?>" placeholder="Email address">
                       </div>
                     </div>
                   </div>
