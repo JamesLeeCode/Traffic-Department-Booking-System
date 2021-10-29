@@ -99,17 +99,17 @@ $poa_location = " ";
           // Enter Designations Into DB
          if(!$conn -> query(
            " INSERT INTO bookings (firstname, lastname,	id, cellphone, email , address, city , country ,postalCode, notes, id_location, poa_location, booking_id, type,                      applicationBookingDate , 	bookingApprovalDate	, testPaymentDate ,collectionDate, applicationFinished  	)
-           VALUES ('$firstname','$lastname','$id', '$cellphone', '$email', '$address', '$city','$country','$postalCode','$notes','$id_location', '$poa_location',  '$booking_id ', '$type', '$applicationDate',      'Pending', 'Pending', 'Pending', 'open'  )"
+           VALUES ('$firstname','$lastname','$id', '$cellphone', '$email', '$address', '$city','$country','$postalCode','$notes','$id_location', '$poa_location',  '$booking_id', '$type', '$applicationDate',      'Pending', 'Pending', 'Pending', 'open'  )"
            ))
            {
-             echo("Error description: ". $mysqli->error);
+             echo("Error description: ". $conn->error);
            }
 
          //CLose DB Connection
          CloseCon($conn);
 
 
-          header("Location:../userside/pending.php");
+          header("Location:../userside/pending.php?booking_id=$booking_id");
           exit();
 
 ?>

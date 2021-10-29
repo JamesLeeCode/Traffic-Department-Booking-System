@@ -41,13 +41,13 @@
   include '../phpScripts/db_connection.php';
   $conn = OpenCon();
   session_start();
-    $id =  $_SESSION["booking_id"];
+    $id =  $_GET['booking_id'];
   $sql = "SELECT * FROM bookings where booking_id = '$id'";
   $result = $conn->query($sql);
 
   //Store the results in an array
   $applicationBookingDate	=" ";
-  $bookingApprovalDate	=" ";
+  $bookingApprovalDate =" ";
   $testPaymentDate=" ";
   $collectionDate=" ";
   while ($row = mysqli_fetch_assoc($result)) {

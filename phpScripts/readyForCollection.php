@@ -4,30 +4,23 @@
 
   //Getting Data from the form
   //jobCode is the primary key
-  $fullNames = $_POST['fullNames'];
-  $email = $_POST['email'];
-  $password = $_POST['password'];
-
+  $id = $_GET['id'];
  //Open DB Connection
  $conn = OpenCon();
   // Enter Designations Into DB
  if(!$conn -> query(
-   " INSERT INTO users (fullName,	email,	password	)
-   VALUES ('$fullNames','$email','$password')"
+   " UPDATE bookings SET collectionDate = 'Ready' WHERE booking_id = '$id' "
    ))
    {
      echo("Error description: ". $mysqli->error);
    }
-
-
    use PHPMailer\PHPMailer\PHPMailer;
    use PHPMailer\PHPMailer\Exception;
    use PHPMailer\PHPMailer\SMTP;
     //Getting Data from the form
     //jobCode is the primary key
 
-
-
+    $email = $_GET['email'];
 
 
 
@@ -63,8 +56,8 @@
 
       //Content
       $mail->isHTML(true);                                  //Set email format to HTML
-      $mail->Subject = 'Booking Application Submitted';
-      $mail->Body    = 'PLEASE NOTE THIS AN IMPORTANT EMAIL <br> Good Day,   '.$fullNames.'<br> Your booking application has been submitted, please wait for an email that will when you come for the Appoinmtent.   ';
+      $mail->Subject = 'Licence Ready Collection';
+      $mail->Body    = 'PLEASE NOTE THIS AN IMPORTANT EMAIL <br> Your Licence is ready for collection, please come betweet 11:00AM and 16:00PM ';
       $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
       $mail->send();
@@ -72,13 +65,11 @@
   } catch (Exception $e) {
       echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
   }
-   //CLose DB Connection
 
 
  //CLose DB Connection
  CloseCon($conn);
 
-
-  header("Location:../index.php?statusRegister=register");
+  header("Location:../userside/adminDashboard.php");
   exit();
  ?>

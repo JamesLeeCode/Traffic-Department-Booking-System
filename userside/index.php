@@ -273,7 +273,7 @@ CloseCon($conn);
                                            <select type="text" id="type" name="type" class="form-control"  >
                                              <option >LICENCE RENEWAL</option>
                                              <option >REPLACE LOST LICENCE </option>
-                                             <option >FIRST TIME DRIVER'S LICENCE </option>
+                                             <option >FIRST TIME DRIVERS LICENCE </option>
                                             </select>
 
                                           </div>
@@ -355,7 +355,7 @@ CloseCon($conn);
                 </div>
                 <hr class="my-4" />
                 <!-- Description -->
-                <h6 class="heading-small text-muted mb-4">About me</h6>
+                <h6 class="heading-small text-muted mb-4">Special Notes</h6>
                 <div class="pl-lg-4">
                   <div class="form-group">
                     <label class="form-control-label">Special Notes</label>

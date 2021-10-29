@@ -186,9 +186,9 @@
                   <tr>
                     <th scope="col" class="sort" data-sort="name">Fullname</th>
                     <th scope="col" class="sort" data-sort="budget">Application Type</th>
-                    <th scope="col" class="sort" data-sort="status">Booking Status</th>
+                    <th scope="col" class="sort" data-sort="status">Appoinmtent Date</th>
                     <th scope="col">Test|Payment</th>
-                    <th scope="col" class="sort" data-sort="completion">Collection</th>
+                    <th scope="col" class="sort" data-sort="completion">Ready For Collection</th>
                     <th scope="col"></th>
                   </tr>
                 </thead>
@@ -248,10 +248,9 @@
                           <i class="fas fa-ellipsis-v"></i>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                          <a class="dropdown-item" href="#">Approve Application</a>
-                          <a class="dropdown-item" href="#">Test|Payment Approval</a>
-                          <a class="dropdown-item" href="#">Collection</a>
-                          <a class="dropdown-item" href="#">Collected</a>
+                          <a class="dropdown-item" href="approveApplication.php?id=<?php echo $row['booking_id']; ?>&email=<?php echo $row['email']; ?>">Approve Application</a>
+                          <a class="dropdown-item" href="testPayment.php?id=<?php echo $row['booking_id']; ?>&email=<?php echo $row['email']; ?>">Test|Payment Approval</a>
+                          <a class="dropdown-item" href="../phpScripts/readyForCollection.php?id=<?php echo $row['booking_id']; ?>&email=<?php echo $row['email']; ?>">Ready For Collection</a>
                         </div>
                       </div>
                     </td>

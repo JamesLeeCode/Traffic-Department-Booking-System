@@ -22,8 +22,9 @@ if(mysqli_num_rows( $result)==1)
   //Store the results in an array
 
   while ($row = mysqli_fetch_assoc($result)) {
-       $_SESSION["booking_id"]   = $row['booking_id'];
-    header("Location:../userside/pending.php");
+       $_SESSION["booking_id"] = $row['booking_id'];
+       $bookingid = $row['booking_id'];
+    header("Location:../userside/pending.php?booking_id=$bookingid");
     exit();
   }
 

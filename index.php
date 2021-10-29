@@ -36,20 +36,14 @@
     <link href="css/style2.css" rel="stylesheet" />
   <!-- responsive style -->
   <link href="css/responsive.css" rel="stylesheet" />
-
+ <style> #toast-container > .toast-error { background-color: #BD362F; } </style>
 </head>
 
 <body>
 
-  <?php
-  if (isset($_GET['statusRegister'])) {
-   echo '<script type="text/javascript">toastr.error("You have been registered on system, please login", "You Have Registered") </script>';
-    }
 
-    if (isset($_GET['status'])) {
-     echo '<script type="text/javascript">toastr.error("Please check your login details and try again", "Incorrect Details Entered") </script>';
-      }
-   ?>
+
+</div>
   <div class="hero_area">
     <!-- header section strats -->
     <header class="header_section">
@@ -135,6 +129,18 @@
               </div>
             </div>
           </div>
+
+
+            <?php
+            if (isset($_GET['statusRegister'])) {
+             echo '<script type="text/javascript">toastr.error("You have been registered on system, please login", "You Have Registered") </script>';
+              }
+
+              if (isset($_GET['status'])) {
+
+               echo '<script type="text/javascript">toastr.error("Please check your login details and try again", "Incorrect Details Entered") </script>';
+                }
+             ?>
           <div class="carousel-item">
             <div class="container ">
               <div class="row">
