@@ -84,92 +84,128 @@
 
             </div>
             <div class="col-lg-6 col-5 text-right">
-              <a href="#" class="btn btn-sm btn-neutral">New</a>
-              <a href="#" class="btn btn-sm btn-neutral">Filters</a>
+
+
             </div>
           </div>
           <!-- Card stats -->
-          <div class="row">
-            <div class="col-xl-3 col-md-6">
-              <div class="card card-stats">
-                <!-- Card body -->
-                <div class="card-body">
-                  <div class="row">
-                    <div class="col">
-                      <h5 class="card-title text-uppercase text-muted mb-0">Licence Renewal Fee</h5>
-                      <span class="h2 font-weight-bold mb-0">R432. 00</span>
-                    </div>
-                    <div class="col-auto">
-                      <div class="icon icon-shape bg-gradient-red text-white rounded-circle shadow">
-                        <i class="ni ni-money-coins"></i>
-                      </div>
-                    </div>
-                  </div>
+          <?php
+  include '../phpScripts/db_connection.php';
+        $conn = OpenCon();
+      $sql = "SELECT * FROM prices ";
+      $result = $conn->query($sql);
 
+      //Store the results in an array
+      $arr = array();
+      while ($row = mysqli_fetch_assoc($result)) {
+        $arr[] = $row;
+      }
+      //CLose DB Connection
+      CloseCon($conn);
+      //Session the Employees array
+      foreach ($arr as $row){
+      ?>
+      <div class="row">
+        <div class="col-xl-3 col-md-6">
+          <div class="card card-stats">
+            <!-- Card body -->
+            <div class="card-body">
+              <div class="row">
+                <div class="col">
+                  <h5 class="card-title text-uppercase text-muted mb-0">Licence Renewal Fee</h5>
+                  <span class="h2 font-weight-bold mb-0">R <?php echo $row['licenceRenewal']; ?></span>
+                </div>
+                <div class="col-auto">
+                  <div class="icon icon-shape bg-gradient-red text-white rounded-circle shadow">
+                    <i class="ni ni-money-coins"></i>
+                  </div>
                 </div>
               </div>
+
             </div>
-            <div class="col-xl-3 col-md-6">
-              <div class="card card-stats">
-                <!-- Card body -->
-                <div class="card-body">
-                  <div class="row">
-                    <div class="col">
-                      <h5 class="card-title text-uppercase text-muted mb-0">Lost Licence Fee</h5>
-                      <span class="h2 font-weight-bold mb-0">R652,00</span>
-                    </div>
-                    <div class="col-auto">
-                      <div class="icon icon-shape bg-gradient-orange text-white rounded-circle shadow">
-                        <i class="ni ni-money-coins"></i>
-                      </div>
-                    </div>
+          </div>
+        </div>
+        <div class="col-xl-3 col-md-6">
+          <div class="card card-stats">
+            <!-- Card body -->
+            <div class="card-body">
+              <div class="row">
+                <div class="col">
+                  <h5 class="card-title text-uppercase text-muted mb-0">Lost Licence Fee</h5>
+                  <span class="h2 font-weight-bold mb-0">R<?php echo $row['lostLicence']; ?></span>
+                </div>
+                <div class="col-auto">
+                  <div class="icon icon-shape bg-gradient-orange text-white rounded-circle shadow">
+                    <i class="ni ni-money-coins"></i>
                   </div>
-
                 </div>
               </div>
+
             </div>
-            <div class="col-xl-3 col-md-6">
-              <div class="card card-stats">
-                <!-- Card body -->
-                <div class="card-body">
-                  <div class="row">
-                    <div class="col">
-                      <h5 class="card-title text-uppercase text-muted mb-0">Disk Renewal Fee</h5>
-                      <span class="h2 font-weight-bold mb-0">R1 416,00</span>
-                    </div>
-                    <div class="col-auto">
-                      <div class="icon icon-shape bg-gradient-green text-white rounded-circle shadow">
-                        <i class="ni ni-money-coins"></i>
-                      </div>
-                    </div>
+          </div>
+        </div>
+        <div class="col-xl-3 col-md-6">
+          <div class="card card-stats">
+            <!-- Card body -->
+            <div class="card-body">
+              <div class="row">
+                <div class="col">
+                  <h5 class="card-title text-uppercase text-muted mb-0">Disk Renewal Fee</h5>
+                  <span class="h2 font-weight-bold mb-0">R<?php echo $row['diskRenewal']; ?></span>
+                </div>
+                <div class="col-auto">
+                  <div class="icon icon-shape bg-gradient-green text-white rounded-circle shadow">
+                    <i class="ni ni-money-coins"></i>
                   </div>
-
                 </div>
               </div>
+
             </div>
-            <div class="col-xl-3 col-md-6">
-              <div class="card card-stats">
-                <!-- Card body -->
-                <div class="card-body">
-                  <div class="row">
-                    <div class="col">
-                      <h5 class="card-title text-uppercase text-muted mb-0">Driver's Licence Fees  </h5>
-                      <span class="h2 font-weight-bold mb-0">R72</span>
-                    </div>
-                    <div class="col-auto">
-                      <div class="icon icon-shape bg-gradient-info text-white rounded-circle shadow">
-                        <i class="ni ni-money-coins"></i>
-                      </div>
-                    </div>
+          </div>
+        </div>
+        <div class="col-xl-3 col-md-6">
+          <div class="card card-stats">
+            <!-- Card body -->
+            <div class="card-body">
+              <div class="row">
+                <div class="col">
+                  <h5 class="card-title text-uppercase text-muted mb-0">Driver's Licence Fees  </h5>
+                  <span class="h2 font-weight-bold mb-0">R<?php echo $row['driversLicence']; ?></span>
+                </div>
+                <div class="col-auto">
+                  <div class="icon icon-shape bg-gradient-info text-white rounded-circle shadow">
+                    <i class="ni ni-money-coins"></i>
                   </div>
-
                 </div>
               </div>
+
             </div>
           </div>
         </div>
       </div>
+
+      <?php
+       };
+      ?>
+    <h6 class="h2 text-white d-inline-block mb-0">Edit System Prices </h6>
+      <form  method="POST" action="../phpScripts/editPrices.php">
+        <select name="item" id="item" >
+        <option value="licenceRenewal">LICENCE RENEWAL FEE</option>
+        <option value="lostLicence">LOST LICENCE FEE</option>
+        <option value="diskRenewal">DISK RENEWAL FEE</option>
+        <option value="driversLicence">DRIVER'S LICENCE FEES </option>
+        </select>
+
+
+        <input type="text" id="price" name="price" placeholder="New Price" />
+
+        <input type="submit" name="signup_submit" value="Edit Price" />
+      </form>
+      <br>
+        </div>
+      </div>
     </div>
+
     <!-- Page content -->
     <div class="container-fluid mt--6">
 
@@ -194,7 +230,7 @@
                 </thead>
                 <tbody class="list">
                   <?php
-                  include '../phpScripts/db_connection.php';
+
                   $conn = OpenCon();
 
                   $sql = "SELECT * FROM bookings ";
@@ -270,6 +306,10 @@
 
     </div>
   </div>
+
+
+
+
   <!-- Argon Scripts -->
   <!-- Core -->
   <script src="assets/vendor/jquery/dist/jquery.min.js"></script>

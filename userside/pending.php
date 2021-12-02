@@ -86,7 +86,7 @@
                     <img alt="Image placeholder" src="assets/img/theme/team-4.jpg">
                   </span>
                   <div class="media-body  ml-2  d-none d-lg-block">
-                    <span class="mb-0 text-sm  font-weight-bold">James Mazivise</span>
+                    <span class="mb-0 text-sm  font-weight-bold"><?php echo $_SESSION["username"]; ?></span>
                   </div>
                 </div>
               </a>
@@ -113,7 +113,7 @@
         <div class="header-body">
           <div class="row align-items-center py-4">
             <div class="col-lg-6 col-7">
-              <h6 class="h2 text-white d-inline-block mb-0">Welcome back, James Bond</h6>
+              <h6 class="h2 text-white d-inline-block mb-0">Welcome back, <?php echo $_SESSION["username"]; ?></h6>
 
             </div>
             <div class="col-lg-6 col-5 text-right">
@@ -122,6 +122,22 @@
             </div>
           </div>
           <!-- Card stats -->
+          <?php
+
+            $conn = OpenCon();
+          $sql = "SELECT * FROM prices ";
+          $result = $conn->query($sql);
+
+          //Store the results in an array
+          $arr = array();
+          while ($row = mysqli_fetch_assoc($result)) {
+            $arr[] = $row;
+          }
+          //CLose DB Connection
+          CloseCon($conn);
+          //Session the Employees array
+          foreach ($arr as $row){
+          ?>
           <div class="row">
             <div class="col-xl-3 col-md-6">
               <div class="card card-stats">
@@ -130,7 +146,7 @@
                   <div class="row">
                     <div class="col">
                       <h5 class="card-title text-uppercase text-muted mb-0">Licence Renewal Fee</h5>
-                      <span class="h2 font-weight-bold mb-0">R432. 00</span>
+                      <span class="h2 font-weight-bold mb-0">R <?php echo $row['licenceRenewal']; ?></span>
                     </div>
                     <div class="col-auto">
                       <div class="icon icon-shape bg-gradient-red text-white rounded-circle shadow">
@@ -149,7 +165,7 @@
                   <div class="row">
                     <div class="col">
                       <h5 class="card-title text-uppercase text-muted mb-0">Lost Licence Fee</h5>
-                      <span class="h2 font-weight-bold mb-0">R652,00</span>
+                      <span class="h2 font-weight-bold mb-0">R<?php echo $row['lostLicence']; ?></span>
                     </div>
                     <div class="col-auto">
                       <div class="icon icon-shape bg-gradient-orange text-white rounded-circle shadow">
@@ -168,7 +184,7 @@
                   <div class="row">
                     <div class="col">
                       <h5 class="card-title text-uppercase text-muted mb-0">Disk Renewal Fee</h5>
-                      <span class="h2 font-weight-bold mb-0">R1 416,00</span>
+                      <span class="h2 font-weight-bold mb-0">R<?php echo $row['diskRenewal']; ?></span>
                     </div>
                     <div class="col-auto">
                       <div class="icon icon-shape bg-gradient-green text-white rounded-circle shadow">
@@ -187,7 +203,7 @@
                   <div class="row">
                     <div class="col">
                       <h5 class="card-title text-uppercase text-muted mb-0">Driver's Licence Fees  </h5>
-                      <span class="h2 font-weight-bold mb-0">R72</span>
+                      <span class="h2 font-weight-bold mb-0">R<?php echo $row['driversLicence']; ?></span>
                     </div>
                     <div class="col-auto">
                       <div class="icon icon-shape bg-gradient-info text-white rounded-circle shadow">
@@ -200,6 +216,10 @@
               </div>
             </div>
           </div>
+
+          <?php
+           };
+          ?>
         </div>
       </div>
     </div>

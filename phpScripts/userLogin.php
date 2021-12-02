@@ -14,8 +14,13 @@ session_start();
 
  $_SESSION["email"] =   $_POST['email'];
  $user = $_POST['email'];
+ $username = "";
 if(mysqli_num_rows( $result)==1)
 {
+  while ($row = mysqli_fetch_assoc($result)) {
+    $username = $row['fullName'];
+     $_SESSION["username"] = $username;
+  }
 
   $sql = "SELECT * FROM bookings where email = '$user' AND applicationFinished = 'open' ";
   $result = $conn->query($sql);

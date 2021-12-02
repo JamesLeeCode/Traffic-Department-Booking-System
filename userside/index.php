@@ -26,6 +26,7 @@ while ($row = mysqli_fetch_assoc($result)) {
    $username = $row['fullName'];
 }
 
+ $_SESSION["username"] = $username;
 
 $sql = "SELECT * FROM bookings where email = '$user' AND applicationBooking='open' ";
 $result = $conn->query($sql);
@@ -128,6 +129,22 @@ CloseCon($conn);
             </div>
           </div>
           <!-- Card stats -->
+          <?php
+
+            $conn = OpenCon();
+          $sql = "SELECT * FROM prices ";
+          $result = $conn->query($sql);
+
+          //Store the results in an array
+          $arr = array();
+          while ($row = mysqli_fetch_assoc($result)) {
+            $arr[] = $row;
+          }
+          //CLose DB Connection
+          CloseCon($conn);
+          //Session the Employees array
+          foreach ($arr as $row){
+          ?>
           <div class="row">
             <div class="col-xl-3 col-md-6">
               <div class="card card-stats">
@@ -136,7 +153,7 @@ CloseCon($conn);
                   <div class="row">
                     <div class="col">
                       <h5 class="card-title text-uppercase text-muted mb-0">Licence Renewal Fee</h5>
-                      <span class="h2 font-weight-bold mb-0">R432. 00</span>
+                      <span class="h2 font-weight-bold mb-0">R <?php echo $row['licenceRenewal']; ?></span>
                     </div>
                     <div class="col-auto">
                       <div class="icon icon-shape bg-gradient-red text-white rounded-circle shadow">
@@ -155,7 +172,7 @@ CloseCon($conn);
                   <div class="row">
                     <div class="col">
                       <h5 class="card-title text-uppercase text-muted mb-0">Lost Licence Fee</h5>
-                      <span class="h2 font-weight-bold mb-0">R652,00</span>
+                      <span class="h2 font-weight-bold mb-0">R<?php echo $row['lostLicence']; ?></span>
                     </div>
                     <div class="col-auto">
                       <div class="icon icon-shape bg-gradient-orange text-white rounded-circle shadow">
@@ -174,7 +191,7 @@ CloseCon($conn);
                   <div class="row">
                     <div class="col">
                       <h5 class="card-title text-uppercase text-muted mb-0">Disk Renewal Fee</h5>
-                      <span class="h2 font-weight-bold mb-0">R1 416,00</span>
+                      <span class="h2 font-weight-bold mb-0">R<?php echo $row['diskRenewal']; ?></span>
                     </div>
                     <div class="col-auto">
                       <div class="icon icon-shape bg-gradient-green text-white rounded-circle shadow">
@@ -193,7 +210,7 @@ CloseCon($conn);
                   <div class="row">
                     <div class="col">
                       <h5 class="card-title text-uppercase text-muted mb-0">Driver's Licence Fees  </h5>
-                      <span class="h2 font-weight-bold mb-0">R72</span>
+                      <span class="h2 font-weight-bold mb-0">R<?php echo $row['driversLicence']; ?></span>
                     </div>
                     <div class="col-auto">
                       <div class="icon icon-shape bg-gradient-info text-white rounded-circle shadow">
@@ -206,6 +223,10 @@ CloseCon($conn);
               </div>
             </div>
           </div>
+
+          <?php
+           };
+          ?>
         </div>
       </div>
     </div>

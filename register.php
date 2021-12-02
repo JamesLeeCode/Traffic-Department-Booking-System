@@ -169,9 +169,9 @@
           <hr>
           </div>
               <form  method="POST" action="phpScripts/userRegister.php">
-          <input type="text" id="fullNames" name="fullNames" placeholder="Full Names" />
-          <input type="text" id="email" name="email" placeholder="E-mail" />
-          <input type="password"  id="password" name="password" placeholder="Password" />
+          <input type="text" required id="fullNames" name="fullNames" placeholder="Full Names" />
+          <input type="email" required id="email" name="email" placeholder="E-mail" />
+          <input type="password" required id="password" name="password" placeholder="Password" />
 
           <input type="submit" name="signup_submit" value="Sign me up" />
         </form>
