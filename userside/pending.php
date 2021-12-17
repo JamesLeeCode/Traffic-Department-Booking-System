@@ -233,10 +233,10 @@
           <div class="card">
             <div class="card-header">
               <div class="row align-items-center">
-                <div class="col-8">
-                  <h3 class="mb-0">Process Status </h3>
+                <div class="col-10">
+                  <h3 >Process Status </h3>
                 </div>
-
+                <a href="../phpScripts/cancelBooking.php?id=<?php echo $id ; ?>" class="btn btn-neutral">Cancel Booking</a>
               </div>
             </div>
             <div class="card-body">

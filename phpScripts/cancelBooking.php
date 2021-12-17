@@ -4,42 +4,34 @@
 
   //Getting Data from the form
   //jobCode is the primary key
-  $fullNames = $_POST['fullNames'];
-  $email = $_POST['email'];
-  $password = $_POST['password'];
+  $id = $_GET['id'];
 
-  $pos = strpos($email, "@");
 
-  $pureMail = substr($email, 0, $pos);
-  if(preg_match("/[a-z]/i", $pureMail)){
-
-   }
-   else {
-     header("Location:../index.php?mail=mail");
-     exit();
-   }
  //Open DB Connection
  $conn = OpenCon();
   // Enter Designations Into DB
- if(!$conn -> query(
-   " INSERT INTO users (fullName,	email,	password	)
-   VALUES ('$fullNames','$email','$password')"
+ /*if(!$conn -> query(
+   " Delete FROM rooms WHERE room_id = '$id'"
    ))
    {
-     echo("Error description: ". $mysqli->error);
-   }
+     echo("Error description: ". $conn->error);
+   }*/
+   if(!$conn -> query(
+  "UPDATE bookings SET applicationFinished = 'closed' WHERE  booking_id = '$id'"
+  ))
+  {
+    echo("Error description: ". $conn->error);
+  }
 
+
+
+ /*
 
    use PHPMailer\PHPMailer\PHPMailer;
    use PHPMailer\PHPMailer\Exception;
    use PHPMailer\PHPMailer\SMTP;
     //Getting Data from the form
     //jobCode is the primary key
-
-
-
-
-
 
 
    require 'PHPMailer/src/Exception.php';
@@ -74,7 +66,7 @@
       //Content
       $mail->isHTML(true);                                  //Set email format to HTML
       $mail->Subject = 'Booking Application Submitted';
-      $mail->Body    = 'PLEASE NOTE THIS AN IMPORTANT EMAIL <br> Good Day,   '.$fullNames.'<br> Your booking application has been submitted, please wait for an email that will when you come for the Appoinmtent.   ';
+      $mail->Body    = 'PLEASE  THIS AN IMPORTANT EMAIL <br> Good Day,   '.$fullNames.'<br> Your booking application has been submitted, please wait for an email that will when you come for the Appoinmtent.   ';
       $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
       $mail->send();
@@ -88,7 +80,8 @@
  //CLose DB Connection
  CloseCon($conn);
 
+ */
+ header("Location:../index.php?bookingCancel=yes");
+ exit();
 
-  header("Location:../index.php?statusRegister=register");
-  exit();
  ?>

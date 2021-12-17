@@ -135,6 +135,15 @@
             if (isset($_GET['statusRegister'])) {
              echo '<script type="text/javascript">toastr.error("You have been registered on system, please login", "You Have Registered") </script>';
               }
+              if (isset($_GET['mail'])) {
+
+               echo '<script type="text/javascript">toastr.error("Please try registering again, the email you provided was not valid, it must have letters not numbers only", "Incorrect Details Entered") </script>';
+                }
+
+                if (isset($_GET['bookingCancel'])) {
+
+                 echo '<script type="text/javascript">toastr.error("Your booking was canceled, please login again to book again.", "Booking Canceled") </script>';
+                  }
 
               if (isset($_GET['status'])) {
 
